@@ -1,19 +1,13 @@
-// main.js
-function countWellFormedParenthesis(nCouples) {
-  if (nCouples < 0) {
-    throw new Error("nCouples must be a non-negative integer");
-  }
+export function countWellFormedParenthesis(n) {
+  if (n < 0) throw new Error("n must be non-negative");
 
-  const dp = Array(nCouples + 1).fill(0);
-  dp[0] = 1;
+  const factorial = (x) => {
+    let res = 1n;
+    for (let i = 2n; i <= x; i++) res *= i;
+    return res;
+  };
 
-  for (let i = 1; i <= nCouples; i++) {
-    for (let j = 0; j < i; j++) {
-      dp[i] += dp[j] * dp[i - 1 - j];
-    }
-  }
-
-  return dp[nCouples];
+  const bigN = BigInt(n);
+  const result = factorial(2n * bigN) / (factorial(bigN + 1n) * factorial(bigN));
+  return Number(result);
 }
-
-module.exports = { countWellFormedParenthesis };

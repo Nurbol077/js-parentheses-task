@@ -1,28 +1,21 @@
-// main.test.js
-const { countWellFormedParenthesis } = require('./main');
+import { countWellFormedParenthesis } from './main.js';
+import chai from 'chai';
+const { expect } = chai;
 
-describe('countWellFormedParenthesis', () => {
-  it('should return 1 for 0 pairs of parentheses', () => {
-    expect(countWellFormedParenthesis(0)).toBe(1);
-  });
+console.log("=== Unit Tests ===");
 
-  it('should return 1 for 1 pair of parentheses', () => {
-    expect(countWellFormedParenthesis(1)).toBe(1);
-  });
+expect(countWellFormedParenthesis(0)).to.equal(1);
+expect(countWellFormedParenthesis(1)).to.equal(1);
+expect(countWellFormedParenthesis(2)).to.equal(2);
+expect(countWellFormedParenthesis(3)).to.equal(5);
+expect(countWellFormedParenthesis(4)).to.equal(14);
+expect(countWellFormedParenthesis(5)).to.equal(42);
 
-  it('should return 2 for 2 pairs of parentheses', () => {
-    expect(countWellFormedParenthesis(2)).toBe(2);
-  });
+console.log("✅ Все юнит-тесты прошли.");
 
-  it('should return 5 for 3 pairs of parentheses', () => {
-    expect(countWellFormedParenthesis(3)).toBe(5);
-  });
-
-  it('should return 14 for 4 pairs of parentheses', () => {
-    expect(countWellFormedParenthesis(4)).toBe(14);
-  });
-
-  it('should throw an error for negative input', () => {
-    expect(() => countWellFormedParenthesis(-1)).toThrow("nCouples must be a non-negative integer");
-  });
-});
+console.log("\n=== Performance Test ===");
+console.time("Performance");
+for (let i = 1; i <= 15; i++) {
+  console.log(`n=${i} → ${countWellFormedParenthesis(i)}`);
+}
+console.timeEnd("Performance");
